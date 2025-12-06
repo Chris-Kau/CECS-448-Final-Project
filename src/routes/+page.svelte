@@ -1,2 +1,19 @@
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://svelte.dev/docs/kit">svelte.dev/docs/kit</a> to read the documentation</p>
+<script>
+    import Header from "./Header.svelte";
+    import "../app.css";
+
+    let isDarkMode = false;
+
+    function toggleTheme() {
+        isDarkMode = !isDarkMode;
+    }
+
+</script>
+
+<div class="min-h-screen transition-colors duration-300 {isDarkMode
+        ? 'bg-gray-900 text-gray-100'
+        : 'bg-gray-100 text-gray-900'}">
+    <Header {isDarkMode} on:toggleTheme={toggleTheme} />
+
+
+</div>
