@@ -2,12 +2,46 @@
     import { createEventDispatcher } from "svelte";
     import { fly } from "svelte/transition";
     import "../app.css";
+    import Stickynote from "./StickyNote.svelte";
     
+    const dispatch = createEventDispatcher();
     let loggedIn = false;
     let isTokenInfoOpen = false;
+    let newStickyNoteTitle = "";
+    let isStickyNoteTitleEmpty = false;
     export let token = "";
     export let isDarkMode;
 
+let isStickyNoteModalOpen = false;
+
+    function openStickyNoteModal() {
+        isStickyNoteModalOpen = true;
+    }
+
+    function closeStickyNoteModal() {
+        isStickyNoteTitleEmpty = false;
+        isStickyNoteModalOpen = false;
+    }
+
+    // Handlers for the events
+    function handleImport() {
+        loggedIn = true;
+        dispatch("importCanvas");
+    }
+
+    function handleCreateStickyNote(color) {
+        if (newStickyNoteTitle == ''){
+            isStickyNoteTitleEmpty = true;
+            return;
+        }
+        isStickyNoteTitleEmpty = false
+        dispatch("createStickyNote", {
+            title: newStickyNoteTitle || "New Sticky Note",
+            color,
+        });
+        newStickyNoteTitle = "";
+        closeStickyNoteModal();
+    }
 </script>
 
 <div
@@ -30,6 +64,7 @@
     </button>
 
     <button
+        on:click={openStickyNoteModal}
         class="w-[80%] py-2 rounded-md {!isDarkMode
             ? 'bg-[#66CCFF]'
             : 'bg-[#00598A]'}
@@ -90,6 +125,7 @@
         </div>
     {/if}
     <button
+        on:click={handleImport}
         class="w-[80%] mx-1 py-1 mb-5 rounded-md 
             transition duration-200 hover:scale-[1.05] border border-cs-todo-border {!isDarkMode
             ? 'bg-[#66CCFF] text-black'
@@ -98,3 +134,64 @@
         IMPORT CANVAS
     </button>
 </div>
+
+{#if isStickyNoteModalOpen}
+    <div
+        class="fixed inset-0 bg-black z-20 bg-opacity-70 flex items-center justify-center"
+    >
+        <div
+            class="{isDarkMode
+                ? 'bg-gray-800 text-gray-100'
+                : 'bg-white text-gray-900'} p-6 max-w-xs w-full rounded-lg shadow-2xl"
+            transition:fly={{ y: 20, duration: 300 }}
+        >
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-xl font-semibold">Add New Sticky Note</h2>
+                <button
+                    on:click={closeStickyNoteModal}
+                    class="text-xl text-cs-text-light dark:text-gray-400 hover:scale-[120%] cursor-pointer"
+                    >&times;</button
+                >
+            </div>
+            {#if isStickyNoteTitleEmpty}
+            <p class="text-red-500">Please enter a title</p>
+            {/if}
+            <input
+                id="note-title"
+                type="text"
+                bind:value={newStickyNoteTitle}
+                placeholder="Enter Note Title..."
+                class="w-full p-2 mb-4 rounded-md border
+                       {isDarkMode
+                    ? 'bg-gray-700 border-gray-600 text-gray-100'
+                    : 'bg-gray-100 border-gray-300 text-gray-900'}"
+                maxlength="50"
+            />
+
+            <p class="mb-3">Choose Color:</p>
+            <!-- svelte-ignore element_invalid_self_closing_tag -->
+            <div class="flex justify-center space-x-4">
+                <!-- svelte-ignore a11y_consider_explicit_label -->
+                <!-- svelte-ignore element_invalid_self_closing_tag -->
+                <button
+                    class="w-10 h-10 rounded-md transition duration-150 hover:ring-2 hover:ring-offset-2 hover:ring-note-yellow hover:ring-offset-white dark:hover:ring-offset-gray-800"
+                    style="background-color: #fffd85"
+                    on:click={() => handleCreateStickyNote("#fffd85")}
+                />
+                <!-- svelte-ignore element_invalid_self_closing_tag -->
+                <!-- svelte-ignore a11y_consider_explicit_label -->
+                <button
+                    class="w-10 h-10 rounded-md transition duration-150 hover:ring-2 hover:ring-offset-2 hover:ring-note-cyan hover:ring-offset-white dark:hover:ring-offset-gray-800"
+                    style="background-color: #93ffef"
+                    on:click={() => handleCreateStickyNote("#93ffef")}
+                />
+                <!-- svelte-ignore a11y_consider_explicit_label -->
+                <button
+                    class="w-10 h-10 rounded-md transition duration-150 hover:ring-2 hover:ring-offset-2 hover:ring-note-purple hover:ring-offset-white dark:hover:ring-offset-gray-800"
+                    style="background-color: #e9aeff"
+                    on:click={() => handleCreateStickyNote("#e9aeff")}
+                />
+            </div>
+        </div>
+    </div>
+{/if}
