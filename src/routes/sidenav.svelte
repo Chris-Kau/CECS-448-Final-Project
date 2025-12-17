@@ -53,6 +53,7 @@ let isStickyNoteModalOpen = false;
     style="height: calc(100vh - 4rem);"
 >
     <button
+        on:click={() => dispatch("openTask")}
         class="w-[80%] py-2 mb-3 rounded-md {!isDarkMode
             ? 'bg-[#66CCFF]'
             : 'bg-[#00598A]'}
