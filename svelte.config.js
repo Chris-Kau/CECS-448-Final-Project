@@ -7,7 +7,7 @@ const config = {
 			fallback: '404.html'
 		}),
 		paths: {
-			base: process.argv.includes('dev') ? '' : "CECS-448-Final-Project"
+			base: process.argv.includes('dev') ? '' : "/CECS-448-Final-Project"
 		}
 	}
 };
