@@ -65,7 +65,7 @@
         <span class="mr-4">= {title}</span>
         <button
             on:click={handleDelete}
-            class="float-right text-base text-cs-text-light hover:text-black hover:scale-125 transition"
+            class="float-right text-base text-cs-text-light hover:text-black hover:scale-125 transition cursor-pointer"
             >&times;</button
         >
     </div>

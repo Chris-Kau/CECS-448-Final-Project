@@ -10,7 +10,9 @@
     let stickyNotes = [];
     let upcomingEvents = [];
     let emptyNoteTitle = false;
-
+    let noTitle = false;
+    let noDesc = false;
+    let noDate = false;
     let isTaskModalOpen = false;
 
     let newTaskTitle = "";
@@ -26,6 +28,9 @@
 
     // Modal Functions
     function openTaskModal() {
+        noTitle = false;
+        noDesc = false;
+        noDate = false;
         isTaskModalOpen = true;
     }
     function closeTaskModal() {
@@ -42,10 +47,23 @@
     }
 
     function addTaskWithDetails() {
+        noTitle = false;
+        noDesc = false;
+        noDate = false;
         if (newTaskTitle.trim() === "") {
-            emptyNoteTitle = true
-            return
+            noTitle = true;
         };
+        
+        if(newTaskDate === ""){
+            noDate = true;
+        }
+
+        if(newTaskDescription.trim() === ""){
+            noDesc = true;
+        }
+        if(noTitle || noDate || noDesc){
+            return
+        }
         emptyNoteTitle = false
         const newTask = {
             id: `task-${Date.now()}`,
@@ -236,7 +254,7 @@
                                                 ? 'filter invert'
                                                 : ''}"
                                             src="./asset/trash.svg"
-                                            alt="Delete"
+                                            alt="Delete Task"
                                         />
                                     </button>
                                 </div>
@@ -257,7 +275,7 @@
                     ? 'bg-gray-800 text-gray-100'
                     : 'bg-white text-gray-900'}   p-6 w-full max-w-lg rounded-lg shadow-2xl"
             >
-                <div class="flex justify-between items-center mb-4">
+                <div class="flex justify-between items-center mb-2">
                     <h2 class="text-xl font-semibold">Add New Task</h2>
                     <button
                         on:click={closeTaskModal}
@@ -265,29 +283,37 @@
                         >&times;</button
                     >
                 </div>
-                {#if emptyNoteTitle}
-                <p class="text-red-500">Please enter a title</p>
+                {#if noTitle}
+                    <p class="text-red-500 m-0">Please enter a title</p>
                 {/if}
-
+                <p>Title: *</p>
                 <input
                     type="text"
                     bind:value={newTaskTitle}
-                    placeholder="Enter task title... *"
-                    class="w-full p-2 mb-3 border rounded-md focus:ring-cs-primary focus:border-cs-primary {isDarkMode
+                    placeholder="..."
+                    class="w-full p-2 m-0 border rounded-md focus:ring-cs-primary focus:border-cs-primary {isDarkMode
                         ? 'bg-[#00598A]'
                         : 'bg-[#66CCFF]'} border-gray-300 dark:border-gray-600"
                 />
+                {#if noDesc}
+                    <p class="text-red-500 m-0">Please enter a description</p>
+                {/if}
+                <p>Task Description: *</p>
                 <textarea
                     bind:value={newTaskDescription}
-                    placeholder="Enter task description..."
-                    class="w-full p-2 mb-3 border rounded-md focus:ring-cs-primary focus:border-cs-primary {isDarkMode
+                    placeholder="..."
+                    class="w-full p-2 m-0 border rounded-md focus:ring-cs-primary focus:border-cs-primary {isDarkMode
                         ? 'bg-[#00598A]'
                         : 'bg-[#66CCFF]'} border-gray-300 dark:border-gray-600"
                 ></textarea>
+                {#if noDate}
+                    <p class="text-red-500 m-0">Please enter a due date</p>
+                {/if}
+                <p>Due Date:</p>
                 <input
                     type="datetime-local"
                     bind:value={newTaskDate}
-                    class="w-full p-2 mb-3 border rounded-md focus:ring-cs-primary focus:border-cs-primary {isDarkMode
+                    class="w-full p-2 m-0 border rounded-md focus:ring-cs-primary focus:border-cs-primary cursor-pointer {isDarkMode
                         ? 'bg-[#00598A]'
                         : 'bg-[#66CCFF]'} border-gray-300 dark:border-gray-600"
                 />

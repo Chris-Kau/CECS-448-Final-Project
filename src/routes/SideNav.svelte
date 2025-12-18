@@ -82,7 +82,7 @@ let isStickyNoteModalOpen = false;
         <input
             type="password"
             bind:value={token}
-            placeholder="Insert Canvas Token Here"
+            placeholder="Canvas Token..."
             class="w-[80%] my-1 p-1 text-sm rounded-md border-0
                 {!isDarkMode
                 ? 'bg-[#66CCFF] text-gray-800'
@@ -91,6 +91,7 @@ let isStickyNoteModalOpen = false;
         <button
             class="ml-3 hover:scale-[1.2]"
             on:click={() => (isTokenInfoOpen = !isTokenInfoOpen)}
+            alt="Canvas Info Button"
         >
             ℹ️
         </button>
@@ -130,7 +131,8 @@ let isStickyNoteModalOpen = false;
         class="w-[80%] mx-1 py-1 mb-5 rounded-md 
             transition duration-200 hover:scale-[1.05] border border-cs-todo-border {!isDarkMode
             ? 'bg-[#66CCFF] text-black'
-            : 'bg-[#00598A] text-white'}"
+            : 'bg-[#00598A] text-white'}
+            dark:border-gray-600 hover:bg-gray-400"
     >
         IMPORT CANVAS
     </button>
@@ -175,21 +177,24 @@ let isStickyNoteModalOpen = false;
                 <!-- svelte-ignore a11y_consider_explicit_label -->
                 <!-- svelte-ignore element_invalid_self_closing_tag -->
                 <button
-                    class="w-10 h-10 rounded-md transition duration-150 hover:ring-2 hover:ring-offset-2 hover:ring-note-yellow hover:ring-offset-white dark:hover:ring-offset-gray-800"
+                    class="cursor-pointer w-10 h-10 rounded-md transition duration-150 hover:ring-2 hover:ring-offset-2 hover:ring-note-yellow hover:ring-offset-white dark:hover:ring-offset-gray-800"
                     style="background-color: #fffd85"
+                    aria-label="Yellow"
                     on:click={() => handleCreateStickyNote("#fffd85")}
                 />
                 <!-- svelte-ignore element_invalid_self_closing_tag -->
                 <!-- svelte-ignore a11y_consider_explicit_label -->
                 <button
-                    class="w-10 h-10 rounded-md transition duration-150 hover:ring-2 hover:ring-offset-2 hover:ring-note-cyan hover:ring-offset-white dark:hover:ring-offset-gray-800"
+                    class="cursor-pointer w-10 h-10 rounded-md transition duration-150 hover:ring-2 hover:ring-offset-2 hover:ring-note-cyan hover:ring-offset-white dark:hover:ring-offset-gray-800"
                     style="background-color: #93ffef"
+                    aria-label="Cyan"
                     on:click={() => handleCreateStickyNote("#93ffef")}
                 />
                 <!-- svelte-ignore a11y_consider_explicit_label -->
                 <button
-                    class="w-10 h-10 rounded-md transition duration-150 hover:ring-2 hover:ring-offset-2 hover:ring-note-purple hover:ring-offset-white dark:hover:ring-offset-gray-800"
+                    class="cursor-pointer w-10 h-10 rounded-md transition duration-150 hover:ring-2 hover:ring-offset-2 hover:ring-note-purple hover:ring-offset-white dark:hover:ring-offset-gray-800"
                     style="background-color: #e9aeff"
+                    aria-label="Lavendar"
                     on:click={() => handleCreateStickyNote("#e9aeff")}
                 />
             </div>
