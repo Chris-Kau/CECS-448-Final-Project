@@ -133,16 +133,19 @@
                 "CECS 448 Assignment",
                 "do this, do that blah blah blah",
                 "2025-12-15T23:59:00",
+                "Long Task",
             ],
             [
                 "CECS 323 Final Exam Prep",
                 "Study all modules for the final exam.",
                 "2025-12-20T10:00:00",
+                "Short Task",
             ],
             [
                 "CECS 491A Project Presentation",
                 "Create a presentation for your project",
                 "2025-12-10T23:59:59",
+                "Medium Task",
             ],
         ];
 
@@ -151,7 +154,7 @@
             content: data[0],
             description: data[1],
             date: data[2].substring(0, 16),
-            tag: "Short task",
+            tag: data[3],
             status: "Todo",
         }));
 
