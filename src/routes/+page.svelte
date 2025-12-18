@@ -286,7 +286,7 @@
                 {#if noTitle}
                     <p class="text-red-500 m-0">Please enter a title</p>
                 {/if}
-                <p>Title: *</p>
+                <p class="mb-1">Title: *</p>
                 <input
                     type="text"
                     bind:value={newTaskTitle}
@@ -298,7 +298,7 @@
                 {#if noDesc}
                     <p class="text-red-500 m-0">Please enter a description</p>
                 {/if}
-                <p>Task Description: *</p>
+                <p class="mb-1">Task Description: *</p>
                 <textarea
                     bind:value={newTaskDescription}
                     placeholder="..."
@@ -309,11 +309,11 @@
                 {#if noDate}
                     <p class="text-red-500 m-0">Please enter a due date</p>
                 {/if}
-                <p>Due Date:</p>
+                <p class="mb-1">Due Date:</p>
                 <input
                     type="datetime-local"
                     bind:value={newTaskDate}
-                    class="w-full p-2 m-0 border rounded-md focus:ring-cs-primary focus:border-cs-primary cursor-pointer {isDarkMode
+                    class="w-full p-2 mb-1 border rounded-md focus:ring-cs-primary focus:border-cs-primary cursor-pointer {isDarkMode
                         ? 'bg-[#00598A]'
                         : 'bg-[#66CCFF]'} border-gray-300 dark:border-gray-600"
                 />
