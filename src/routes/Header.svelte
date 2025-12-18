@@ -19,12 +19,13 @@
         class="p-2 rounded-full bg-gray-200 dark:bg-gray-700 
             text-gray-800 dark:text-gray-200 transition-colors duration-300 hover:scale-110 cursor-pointer"
         aria-label="Toggle Dark Mode"
-        alt="Toggle Dark Mode"
     >
+    <span aria-hidden="true">
         {#if isDarkMode}
             🌙
         {:else}
             ☀️
         {/if}
+    </span>
     </button>
 </header>
