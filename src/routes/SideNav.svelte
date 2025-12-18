@@ -21,6 +21,7 @@ let isStickyNoteModalOpen = false;
     function closeStickyNoteModal() {
         isStickyNoteTitleEmpty = false;
         isStickyNoteModalOpen = false;
+        newStickyNoteTitle = "";
     }
 
     // Handlers for the events
@@ -148,7 +149,7 @@ let isStickyNoteModalOpen = false;
                 : 'bg-white text-gray-900'} p-6 max-w-xs w-full rounded-lg shadow-2xl"
             transition:fly={{ y: 20, duration: 300 }}
         >
-            <div class="flex justify-between items-center mb-4">
+            <div class="flex justify-between items-center mb-1">
                 <h2 class="text-xl font-semibold">Add New Sticky Note</h2>
                 <button
                     on:click={closeStickyNoteModal}
@@ -157,17 +158,18 @@ let isStickyNoteModalOpen = false;
                 >
             </div>
             {#if isStickyNoteTitleEmpty}
-            <p class="text-red-500">Please enter a title</p>
+            <p class="text-red-500 m-0">Please enter a title</p>
             {/if}
+            <p class="mb-1">Tite: *</p>
             <input
                 id="note-title"
                 type="text"
                 bind:value={newStickyNoteTitle}
-                placeholder="Enter Note Title..."
+                placeholder="..."
                 class="w-full p-2 mb-4 rounded-md border
-                       {isDarkMode
-                    ? 'bg-gray-700 border-gray-600 text-gray-100'
-                    : 'bg-gray-100 border-gray-300 text-gray-900'}"
+                    {isDarkMode
+                        ? 'bg-[#00598A]'
+                        : 'bg-[#66CCFF]'} border-gray-300 dark:border-gray-600"
                 maxlength="50"
             />
 
