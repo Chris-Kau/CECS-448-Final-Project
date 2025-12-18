@@ -312,7 +312,7 @@
                 {#if noDate}
                     <p class="text-red-500 m-0">Please enter a due date</p>
                 {/if}
-                <p class="mb-1">Due Date:</p>
+                <p class="mb-1">Due Date: *</p>
                 <input
                     type="datetime-local"
                     bind:value={newTaskDate}
